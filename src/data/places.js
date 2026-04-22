@@ -32,7 +32,7 @@ export const places = [
     country: 'Italy',
     description:
       'A dramatic stretch of coastline with colourful cliffside villages, crystal-clear turquoise water, lemon groves, and fresh seafood.',
-    image: 'https://images.unsplash.com/photo-1533760881669-80db4d7b341c?w=600&q=80',
+    image: 'https://th.bing.com/th/id/R.5c7904a5deb6bfb633ffe07dc5e1925b?rik=xyCjNn98Lrimcw&pid=ImgRaw&r=0',
     tag: 'Coastal',
   },
   {
