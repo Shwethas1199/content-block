@@ -14,6 +14,18 @@
     <div id="root"></div>
     <!-- SFMC Content Block SDK -->
     <script src="https://code.exacttarget.com/content-block-sdk/1.0/sdk.js"></script>
+    <script>
+      // Initialize SFMC SDK synchronously before React loads
+      try {
+        if (window.sfdc && window.sfdc.BlockSDK) {
+          var sdk = new window.sfdc.BlockSDK();
+          sdk.setBlockEditorWidth('full');
+          window.__sfmcSdk = sdk;
+        }
+      } catch (e) {
+        console.warn('SFMC SDK init failed:', e);
+      }
+    </script>
     <script type="module" src="/src/main.jsx"></script>
   </body>
 </html>

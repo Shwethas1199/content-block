@@ -1,22 +1,19 @@
 import { useEffect } from 'react'
 
-/**
- * Initialises the SFMC Content Block SDK (if running inside SFMC email editor)
- * and sets the block to full width so it fills the editor canvas.
- */
 export function useSFMC() {
   useEffect(() => {
-    // CustomContentBlockSDK is loaded globally from the official SFMC SDK script
-    if (!window.CustomContentBlockSDK) {
-      // Running outside SFMC (local dev / direct browser) — do nothing
-      return
+    // SDK is pre-initialized in index.html before React loads.
+    // Call setBlockEditorWidth again after mount as a fallback.
+    try {
+      if (window.__sfmcSdk) {
+        window.__sfmcSdk.setBlockEditorWidth('full')
+      } else if (window.sfdc && window.sfdc.BlockSDK) {
+        var sdk = new window.sfdc.BlockSDK()
+        sdk.setBlockEditorWidth('full')
+        window.__sfmcSdk = sdk
+      }
+    } catch (e) {
+      console.warn('SFMC SDK not available:', e)
     }
-
-    const sdk = new window.CustomContentBlockSDK.SdkClient()
-
-    sdk.init(function (data) {
-      // 'full' makes the block expand to fill the full editor width
-      sdk.setBlockEditorWidth('full')
-    })
   }, [])
 }
